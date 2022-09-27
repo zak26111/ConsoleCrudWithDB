@@ -99,7 +99,7 @@ namespace ConsoleCrudOperationWithDB.DAL
                     con.Open();
                     int result = cmd.ExecuteNonQuery();
                     if (result > 0)
-                        message = "Record successfully insernted";
+                        message = "Record successfully inserted";
                     else
                         message = "Sorry! error occured";
                 }
@@ -127,6 +127,31 @@ namespace ConsoleCrudOperationWithDB.DAL
                     int result = cmd.ExecuteNonQuery();
                     if (result > 0)
                         message = "Record updated successfully";
+                    else
+                        message = "Sorry ! Error occured.";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return message;
+        }
+
+        public string DeleteEmployee(string emailid)
+        {
+            string message = string.Empty;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Usp_DeleteEmployee", con);                   
+                    cmd.Parameters.AddWithValue("@EmailId", emailid);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    int result = cmd.ExecuteNonQuery();
+                    if (result > 0)
+                        message = "Record deleted successfully";
                     else
                         message = "Sorry ! Error occured.";
                 }

@@ -25,7 +25,7 @@ namespace CRUDOperatonWithDNT2
 
             while (!isExit)
             {
-                Console.WriteLine("Please enter your choice. 1-Show All Employee,2-Show Single Employee,3-Save Employee,4-Update Emaployee,5-Exit");
+                Console.WriteLine("Please enter your choice. 1-Show All Employee,2-Show Single Employee,3-Save Employee,4-Update Employee,5-Delete Employee,6-Exit");
                 int userChoice = Convert.ToInt32(Console.ReadLine());
 
                 if (userChoice == 1)
@@ -72,6 +72,13 @@ namespace CRUDOperatonWithDNT2
                     UpdateEmployee(employee);
                 }
                 else if (userChoice == 5)
+                {
+
+                    Console.WriteLine("Please enter your email Id");
+                    string emailId = Console.ReadLine();
+                    DeleteEmployee(emailId);
+                }
+                else if (userChoice == 6)
                 {
                     isExit = true;
                     Console.WriteLine("Thank you for visiting");
@@ -128,6 +135,12 @@ namespace CRUDOperatonWithDNT2
         static void UpdateEmployee(Employee employee)
         {
             string result = _employeeDAL.UpdateEmployee(employee);
+            Console.WriteLine(result); ;
+        }
+
+        static void DeleteEmployee(string emailId)
+        {
+            string result = _employeeDAL.DeleteEmployee(emailId);
             Console.WriteLine(result); ;
         }
 
